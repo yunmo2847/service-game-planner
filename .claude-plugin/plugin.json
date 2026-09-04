@@ -1,0 +1,21 @@
+{
+  "name": "service-game-planner",
+  "version": "0.1.0",
+  "description": "웹서비스/웹게임 기획을 소크라테스식 질문으로 구체화하고, 실제 리서치와 수익모델(BM) 설계를 거쳐 노션에 한눈에 보이게 정리하는 스킬 모음.",
+  "author": {
+    "name": "yunmo2847",
+    "url": "https://github.com/yunmo2847"
+  },
+  "homepage": "https://github.com/yunmo2847/service-game-planner",
+  "repository": "https://github.com/yunmo2847/service-game-planner",
+  "license": "MIT",
+  "keywords": [
+    "기획",
+    "planning",
+    "gdd",
+    "prd",
+    "notion",
+    "game-design",
+    "web-service"
+  ]
+}

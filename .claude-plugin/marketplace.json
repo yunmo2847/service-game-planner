@@ -1,0 +1,20 @@
+{
+  "name": "service-game-planner",
+  "owner": {
+    "name": "yunmo2847"
+  },
+  "metadata": {
+    "description": "웹서비스/웹게임 기획을 소크라테스식 질문으로 구체화하고 노션에 정리하는 스킬 마켓플레이스",
+    "version": "0.1.0",
+    "pluginRoot": "."
+  },
+  "plugins": [
+    {
+      "name": "service-game-planner",
+      "source": "./",
+      "description": "웹서비스/웹게임 기획을 소크라테스식 질문으로 구체화하고, 실제 리서치와 수익모델(BM) 설계를 거쳐 노션에 한눈에 보이게 정리하는 스킬 모음.",
+      "version": "0.1.0",
+      "keywords": ["기획", "planning", "gdd", "prd", "notion", "game-design", "web-service"]
+    }
+  ]
+}
