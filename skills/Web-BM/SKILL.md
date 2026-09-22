@@ -1,32 +1,34 @@
 ---
 name: Web-BM
-description: 웹서비스 수익모델(BM)을 구체적으로 설계할 때 사용 — 수익원 선택, 가격 정책, 전환 퍼널, 핵심 지표까지. "BM 짜줘", "가격을 얼마로 해야할지 모르겠어" 같은 요청에 사용. Web-Plan 작업 중 BM을 더 깊게 파야 할 때 이어간다.
+description: Use to design a web service's business model (BM) concretely — choice of revenue source, pricing policy, conversion funnel, key metrics. Use for requests like "design a BM", "I don't know what price to set" ("BM 짜줘", "가격을 얼마로 해야할지 모르겠어"). Continues mid-Web-Plan whenever BM needs to go deeper.
 ---
 
 # Web-BM
 
-이미 서비스의 컨셉과 타겟이 어느 정도 잡힌 상태에서, "그래서 이걸로 어떻게 돈을 버는가"를 구체적인 설계로 만드는 스킬.
+For when the service's concept and target are already roughly settled, and the question is "so how does this actually make money" — turns that into a concrete design.
 
-## 1. 전제부터 확인한다
+**Write the output in the language the user is using with you (Korean by default).** These instructions are in English only for maintainability; it's not a cue to answer in English.
 
-컨셉/타겟이 아직 안 잡혀 있다면 Web-Plan을 먼저 쓰라고 안내한다. BM은 진공에서 설계할 수 없다 — 누구에게 무엇을 파는지가 먼저 있어야 한다.
+## 1. Confirm the premise first
 
-다음을 확인한다 (대화에서 이미 나왔으면 다시 묻지 않는다):
-- 타겟 유저가 이 문제 때문에 지금 무엇에/얼마를 쓰고 있는가 (기존 대안의 가격이 앵커가 된다)
-- 유사 서비스의 BM은 무엇인가 — 모르면 Web-DeepSearch로 조사를 제안한다
+If concept/target aren't settled yet, point the user to Web-Plan first. BM can't be designed in a vacuum — you need to know who's being sold what before designing how.
 
-## 2. 모델을 비교하고 추천한다
+Confirm (skip anything already covered in conversation):
+- What is the target user spending money on right now for this same problem (the cost of the existing alternative anchors the price)
+- What BM do similar services use — if unknown, suggest Web-DeepSearch research
 
-`../references/bm-web.md`의 모델 표를 참고해 (이미 이 대화에서 읽은 적 있다면 다시 읽지 않는다) 이 서비스에 맞는 후보 2~3개를 뽑고, 각각의 장단점을 이 서비스 맥락에서 짧게 평가한다. 하나만 던지지 말고 비교한 뒤 추천 근거를 명시한다. 여러 모델을 조합하는 게 더 나은 경우도 많다(예: 프리미엄 + 광고).
+## 2. Compare and recommend models
 
-## 3. 가격과 전환 지점을 설계한다
+Using the model table in `../references/bm-web.md` (skip re-reading if already read this conversation), pick 2-3 candidates that fit this service and briefly evaluate the pros/cons of each in this service's context. Don't present just one — compare, then state the reasoning for the recommendation. Combining several models is often the better answer (e.g. freemium + ads).
 
-- 구체적인 가격 후보를 숫자로 제시한다 (막연한 "적당히"가 아니라 근거와 함께)
-- 무료 티어가 있다면, 유료 전환을 유도하는 구체적 트리거(사용량 한도, 고급 기능, 팀 기능 등)를 정의한다
-- 유저 플로우 상에서 결제/업그레이드 유도가 자연스럽게 등장하는 지점을 짚는다 — 강제로 막는 방식인지, 가치를 먼저 보여준 뒤 유도하는 방식인지
+## 3. Design the price and conversion points
 
-## 4. 지표를 정의한다
+- Propose concrete price candidates as numbers (with reasoning, not a vague "something reasonable")
+- If there's a free tier, define the concrete trigger that drives upgrade (usage cap, advanced feature, team feature, etc.)
+- Identify where in the user flow the payment/upgrade prompt appears naturally — is it a hard wall, or value-first-then-prompt?
 
-정밀한 재무 모델링까지는 필요 없지만, 최소한 아래는 방향성이라도 명시한다: 전환율 목표, 추적할 핵심 수익 지표(MRR, ARPU 등 1~2개), 대략적인 손익분기 감(몇 명의 유료 유저가 있어야 하는지 자릿수 수준으로).
+## 4. Define metrics
 
-결과물은 기존 기획서가 있다면 그 BM 섹션에 바로 넣을 수 있는 형태로 정리한다.
+Full financial modeling isn't needed, but state at least a direction for: conversion target, 1-2 core revenue metrics to track (MRR, ARPU, etc.), and a rough break-even sense (how many paying users, at least in order of magnitude).
+
+Format the result so it can drop straight into the BM section of an existing plan, if one exists.

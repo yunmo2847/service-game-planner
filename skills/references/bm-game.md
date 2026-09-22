@@ -1,24 +1,24 @@
-# 웹게임 BM(수익모델) 설계 참고
+# Web Game BM (Business Model) Reference
 
-Game-BM 스킬, 그리고 Game-Plan의 수익화 섹션에서 참고한다.
+Used by the Game-BM skill, and by Game-Plan's monetization section.
 
-## 흔한 게임 수익모델
+## Common game revenue models
 
-| 모델 | 핵심 아이디어 | 잘 맞는 경우 | 리스크 |
+| Model | Core idea | Good fit for | Risk |
 |---|---|---|---|
-| 광고 (보상형) | 유저가 자발적으로 광고를 보고 보상(재화, 부활 등)을 받음 | 캐주얼/하이퍼캐주얼, 무료 대량 유입 | 과하면 게임 경험을 해침 |
-| 광고 (전면) | 스테이지 전환 등 특정 시점에 강제 노출 | 캐주얼 게임의 기본 수익원 | 이탈률 증가 위험, 빈도 조절 필수 |
-| IAP - 시간 단축 | 대기시간/제작시간을 돈으로 스킵 | 빌더/타이쿤류, 스태미나 시스템이 있는 게임 | 페이투윈 논란 가능성 |
-| IAP - 코스메틱 | 스탯에 영향 없는 외형만 판매 | 경쟁/PvP 게임, 공정성이 중요한 장르 | 매출 규모가 스탯 판매보다 작은 편 |
-| IAP - 파워/컨텐츠 | 스탯, 캐릭터, 자원 등 실질적 파워 판매 | RPG/방치형, 성장이 핵심 재미인 게임 | 무과금 유저 이탈, 밸런스 붕괴 위험 |
-| 배틀패스/시즌패스 | 시즌 단위 정액 결제로 보상 트랙 해금 | 라이브서비스형, 콘텐츠 주기가 있는 게임 | 시즌마다 콘텐츠를 계속 만들어야 하는 부담 |
+| Ads (rewarded) | Player opts into an ad in exchange for a reward (currency, revive, etc.) | Casual/hyper-casual, high free-user volume | Overuse damages the play experience |
+| Ads (interstitial) | Forced impression at a transition point (stage change, etc.) | Baseline revenue for casual games | Raises churn risk — frequency needs to be controlled |
+| IAP — time skip | Pay to skip wait/build time | Builder/tycoon games, games with a stamina system | Risk of pay-to-win criticism |
+| IAP — cosmetic | Sells appearance only, no stat impact | Competitive/PvP games, genres where fairness matters | Generally lower revenue than power sales |
+| IAP — power/content | Sells stats, characters, resources — real power | RPG/idle games where growth is the core fun | Non-paying user churn, risk of balance collapse |
+| Battle pass / season pass | Flat seasonal fee unlocks a reward track | Live-service games with a content cadence | Requires continuously producing new content every season |
 
-## 프리투플레이 밸런싱의 핵심 질문
+## The core question in free-to-play balancing
 
-무과금 유저도 "충분히 재미있게" 진행 가능한가, 과금 유저는 "충분히 빠르게" 진행 가능한가 — 이 두 축의 격차를 의도적으로 설계해야 한다. 격차가 없으면 결제 유인이 없고, 너무 크면 무과금 유저가 이탈한다. Game-Balance 스킬에서 이 격차를 실제 수치 곡선으로 설계한다.
+Can non-paying players progress "enjoyably enough," and can paying players progress "quickly enough" — this gap between the two needs to be designed on purpose. No gap means no reason to pay; too wide a gap means non-paying players churn. The Game-Balance skill turns this gap into an actual numeric curve.
 
-## 기획서에 최소한 명시할 것
+## What the plan should state at minimum
 
-- 이 게임의 **주 수익원**과 **보조 수익원**은 무엇인가 (보통 1개 주력 + 1~2개 보조)
-- 결제 유도 지점이 플레이 어느 시점에 자연스럽게 등장하는가 (강제로 막아 유도하는 방식인지, 자발적 편의 구매인지)
-- 무과금 유저의 콘텐츠 도달 범위 (전체 콘텐츠의 몇 % 정도까지 무리 없이 도달 가능한지)
+- This game's **primary revenue source** and **secondary revenue source** (usually 1 main + 1-2 secondary)
+- Where in play the payment trigger shows up naturally (a hard wall that forces the decision, or a voluntary convenience purchase)
+- Free-to-play reach (roughly what % of total content a non-paying player can comfortably reach)

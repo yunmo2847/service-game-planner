@@ -1,31 +1,31 @@
-# 소크라테스식 질문 기법 (기획 인터뷰용)
+# Socratic Interview Technique (for planning interviews)
 
-Plan 계열 스킬(Web-Plan, Game-Plan)은 사용자가 부른 요구사항을 그대로 받아적지 않는다. 대신 질문을 통해 사용자가 스스로 결정을 내리도록 유도한다. 목적은 취조가 아니라, 사용자도 미처 생각 못 했던 전제나 모순을 스스로 발견하게 만드는 것이다.
+The Plan skills (Web-Plan, Game-Plan) don't just transcribe whatever the user asks for. They ask questions that lead the user to clarify their own decisions. The goal isn't interrogation — it's helping the user surface premises or contradictions they hadn't fully thought through themselves.
 
-## 원칙
+## Principles
 
-**답을 주기 전에 먼저 되묻는다.** 사용자가 "이런 기능 넣어줘"라고 하면 바로 받아적지 말고, 그 기능이 정말 필요한 이유를 한 번은 물어본다. "이 기능이 없으면 핵심 가치가 무너지나요, 아니면 있으면 좋은 정도인가요?" 같은 질문 하나로 우선순위가 스스로 정리되는 경우가 많다.
+**Ask before you answer.** When the user says "add a challenge feature," don't write it down immediately — ask why it's needed first. A single question like "Would the core value break without this, or is it just nice to have?" often sorts out priority on its own.
 
-**질문은 한 번에 1~3개로 좁힌다.** 소크라테스식이라고 질문 세례를 퍼붓지 않는다. 답변 부담이 너무 크면 사용자는 진행 자체를 포기한다. 핵심을 찌르는 질문 하나가 열 개의 얕은 질문보다 낫다.
+**Keep questions to 1-3 at a time.** "Socratic" doesn't mean firing off a barrage of questions. If answering feels like too much work, the user gives up on the process itself. One sharp question beats ten shallow ones.
 
-**"왜"를 최소 한 번은 파고든다.** 표면적 요구(what) 뒤에 있는 진짜 이유(why)를 확인해야 다른 대안도 함께 검토할 수 있다. 예: "랭킹 시스템 넣어줘" → "랭킹으로 얻고 싶은 효과가 경쟁 유도인가요, 소셜 증거(social proof)인가요?" — 답에 따라 설계가 완전히 달라진다.
+**Dig into "why" at least once.** Confirming the real reason (why) behind the stated ask (what) is what lets you evaluate alternatives too. Example: "add a ranking system" → "Is the effect you want from ranking competitive drive, or social proof?" — the answer changes the design completely.
 
-**전제를 검증할 땐 구체적 시나리오로 되묻는다.** 추상적으로 "정말 필요할까요?"라고 묻기보다, "출시 첫 주에 유저가 100명뿐이면 이 랭킹 시스템이 의미가 있을까요?"처럼 구체적 상황을 붙이면 사용자가 더 명확하게 판단할 수 있다.
+**When testing a premise, use a concrete scenario.** Instead of abstractly asking "is this really necessary?", attach a specific situation: "If there are only 100 users in the first week, does this ranking system still mean anything?" — concrete scenarios make it easier for the user to judge clearly.
 
-**막힐 때는 질문을 멈추고 초안을 보여준다.** 답하기 어려워하거나("모르겠어요, 그냥 정해주세요") 진행이 막히면 억지로 더 묻지 않는다. 가정을 명시한 채로 초안을 먼저 제시하고, 그 초안을 보면서 수정하게 하는 편이 훨씬 빠르다.
+**When the user gets stuck, stop asking and show a draft.** If they struggle to answer ("I don't know, just decide for me") or the conversation stalls, don't push for more answers. Present a draft with assumptions clearly labeled, and let them revise from there — it's much faster.
 
-## BM(수익모델)에는 특히 일찍, 집요하게 묻는다
+## Ask about BM (business model) early, and press on it
 
-"어차피 다들 돈 벌려고 만드는 거다" — 이 스킬 계열은 이 전제를 기본값으로 깐다. 인터뷰 초반(컨셉/타겟 확인 직후, 기능 목록을 짜기 전)에 반드시 한 번은 묻는다: "이걸로 어떻게 돈을 벌 건가요? 수익화가 목적이 아니라면, 이 프로젝트가 '성공'했다고 부를 기준이 뭔가요?"
+This skill set assumes, by default, that everyone building this eventually wants to make money from it. Early in the interview — right after concept/target are confirmed, before drafting the feature list — always ask once: "How does this make money? If monetization isn't the goal, what does 'success' mean for this project?"
 
-이 답이 이후 기능 우선순위(어떤 기능이 수익화 지점과 직결되는가)를 정하는 기준이 된다. BM을 문서 맨 끝에 형식적으로 붙이지 말고, 기능/시스템 설계 단계에서부터 계속 참조한다.
+The answer becomes the yardstick for feature priority later (which features connect directly to the monetization point). Don't bolt BM onto the end of the document as a formality — keep referring back to it throughout feature/system design.
 
-## 예시
+## Example
 
-**나쁜 예 (그냥 받아적기):**
-> 사용자: 챌린지 기능 넣어줘
-> Claude: 네, 챌린지 기능 섹션에 추가하겠습니다. (바로 기능 명세로 직행)
+**Bad (just transcribing):**
+> User: Add a challenge feature.
+> Claude: Sure, I'll add a challenge section. (goes straight to spec)
 
-**좋은 예 (소크라테스식):**
-> 사용자: 챌린지 기능 넣어줘
-> Claude: 좋아요. 이 챌린지가 신규 유저 리텐션용인가요, 결제 유도용(예: 클리어 시 유료 재화 보상)인가요? 목적에 따라 난이도 곡선을 완전히 다르게 잡아야 해서요.
+**Good (Socratic):**
+> User: Add a challenge feature.
+> Claude: Got it. Is this challenge meant to drive new-user retention, or to nudge payment (e.g. a paid-currency reward on clear)? The difficulty curve needs to be completely different depending on the goal.

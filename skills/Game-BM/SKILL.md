@@ -1,31 +1,33 @@
 ---
 name: Game-BM
-description: 웹게임 수익모델(BM)을 구체적으로 설계할 때 사용 — 수익원 선택, 무과금-과금 격차, 결제 유도 지점, 핵심 지표까지. "과금 모델 짜줘", "IAP 설계해줘" 같은 요청에 사용. Game-Plan/Game-Balance 작업 중 수익화를 더 깊게 파야 할 때 이어간다.
+description: Use to design a web game's business model (BM) concretely — choice of revenue source, free-to-pay gap, payment trigger points, key metrics. Use for requests like "design a monetization model", "design the IAP" ("과금 모델 짜줘", "IAP 설계해줘"). Continues mid-Game-Plan/Game-Balance whenever monetization needs to go deeper.
 ---
 
 # Game-BM
 
-이미 게임의 코어 루프와 진행 시스템이 어느 정도 잡힌 상태에서, "그래서 이걸로 어떻게 돈을 버는가"를 구체적인 설계로 만드는 스킬. 코어 루프가 아직 안 잡혀 있다면 Game-Plan을 먼저 쓰라고 안내한다 — BM은 게임플레이 위에 얹는 것이지, 그 반대가 아니다.
+For when the game's core loop and progression system are already roughly settled, and the question is "so how does this actually make money" — turns that into a concrete design. If the core loop isn't settled yet, point the user to Game-Plan first — BM sits on top of gameplay, not the other way around.
 
-## 1. 방향을 확인한다
+**Write the output in the language the user is using with you (Korean by default).** These instructions are in English only for maintainability; it's not a cue to answer in English.
 
-- 무료로 즐기는 실험작인가, 상업적 목적인가 (상업적이 아니면 이 스킬 자체가 불필요할 수 있다 — 확인한다)
-- 유사 게임은 어떤 BM을 쓰는가 — 모르면 Game-DeepSearch로 조사를 제안한다
+## 1. Confirm direction
 
-## 2. 모델을 비교하고 추천한다
+- Is this a free experiment, or a commercial project (if not commercial, this skill may not even be needed — confirm)
+- What BM do similar games use — if unknown, suggest Game-DeepSearch research
 
-`../references/bm-game.md`의 모델 표를 참고해 (이미 이 대화에서 읽은 적 있다면 다시 읽지 않는다) 이 게임의 장르/코어 루프에 맞는 주 수익원 1개와 보조 수익원 1~2개를 추천한다. 예를 들어 경쟁/PvP 게임에 파워 판매형 IAP를 추천하면 공정성 문제가 생긴다는 식으로, 장르와의 궁합을 반드시 짚는다.
+## 2. Compare and recommend models
 
-## 3. 무과금-과금 격차를 설계한다
+Using the model table in `../references/bm-game.md` (skip re-reading if already read this conversation), recommend one primary revenue source and 1-2 secondary sources that fit this game's genre/core loop. Always call out genre fit explicitly — e.g. recommending power-selling IAP for a competitive/PvP game creates a fairness problem, and that needs to be said.
 
-프리투플레이의 핵심은 이 격차 설계다: 무과금 유저도 충분히 재밌게 진행 가능해야 하고(격차가 너무 크면 이탈), 과금 유저는 충분히 빠르게/유리하게 진행 가능해야 한다(격차가 없으면 결제 유인이 없음). 무과금 유저가 전체 콘텐츠의 어느 정도까지 무리 없이 도달 가능한지 구체적으로 정의한다. 실제 수치(재화 획득/소모 곡선)로 이 격차를 만들어야 한다면 Game-Balance 스킬을 사용자에게 제안한다.
+## 3. Design the free-to-pay gap
 
-## 4. 결제 유도 지점을 게임 플레이에 배치한다
+The core of free-to-play is this gap: non-paying players need to be able to progress enjoyably enough (too wide a gap → churn), and paying players need to progress fast/favorably enough (no gap → no reason to pay). Concretely define how much of the total content a non-paying player can comfortably reach. If this gap needs to become actual numbers (currency source/sink curves), suggest the Game-Balance skill to the user.
 
-플레이어가 어느 시점에 결제 화면을 자연스럽게 마주치는지 정의한다 — 강제로 막아서 유도하는 방식(스태미나 소진 등)인지, 자발적 편의 구매(스킵권 등)인지 명시하고, 과하면 이탈로 이어진다는 걸 감안해 빈도를 짚는다.
+## 4. Place payment triggers in the gameplay
 
-## 5. 지표를 정의한다
+Define the moments a player naturally encounters the payment screen — state clearly whether it's a hard wall (stamina depletion, etc.) or a voluntary convenience purchase (skip tickets, etc.), and note that frequency matters since overdoing it drives churn.
 
-정밀한 모델링은 필요 없지만 최소한 방향성은 명시한다: 결제 유저 비율 목표, 추적할 핵심 지표(ARPU, ARPPU 등 1~2개).
+## 5. Define metrics
 
-결과물은 기존 GDD가 있다면 그 수익화 섹션에 바로 넣을 수 있는 형태로 정리한다.
+Precise modeling isn't needed, but state at least a direction: target paying-user ratio, 1-2 core metrics to track (ARPU, ARPPU, etc.).
+
+Format the result so it can drop straight into the monetization section of an existing GDD, if one exists.

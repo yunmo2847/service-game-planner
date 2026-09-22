@@ -1,35 +1,37 @@
 ---
 name: Game-Balance
-description: 웹게임 수치 밸런싱을 설계할 때 사용 — 재화 획득/소모처, 성장 곡선, 난이도 곡선, 무과금-과금 격차까지. "밸런싱 짜줘", "경험치 곡선 어떻게 잡아야돼" 같은 요청에 사용. Game-Plan/Game-BM 작업 중 수치로 구현해야 할 때 이어간다.
+description: Use to design web game numeric balancing — currency sources/sinks, growth curves, difficulty curves, free-to-pay gap. Use for requests like "design the balancing", "how should I set the XP curve" ("밸런싱 짜줘", "경험치 곡선 어떻게 잡아야돼"). Continues mid-Game-Plan/Game-BM whenever something needs to become actual numbers.
 ---
 
 # Game-Balance
 
-게임의 재화/성장 시스템을 실제 사용 가능한 수치와 공식으로 설계하는 스킬. 코어 루프와 진행 시스템(무엇이 성장 축인지)이 아직 안 잡혀 있다면 Game-Plan을 먼저 쓰라고 안내한다.
+Turns the game's currency/growth systems into usable numbers and formulas. If the core loop and progression system (what the growth axis even is) aren't settled yet, point the user to Game-Plan first.
 
-## 1. 재화/자원 표부터 만든다
+**Write the output in the language the user is using with you (Korean by default).** These instructions are in English only for maintainability; it's not a cue to answer in English.
 
-`../references/web-game.md`의 밸런싱 섹션 형식을 참고한다 (같은 대화에서 Game-Plan을 거쳐와 이미 읽은 상태라면 다시 읽지 않는다):
+## 1. Start with the currency/resource table
 
-| 항목 | 획득처 | 소모처 | 기준값/비고 |
+Reference the balancing section format in `../references/web-game.md` (skip re-reading if this conversation already went through Game-Plan and read it):
+
+| Item | Source | Sink | Baseline value / notes |
 |---|---|---|---|
 
-모든 재화는 획득처와 소모처가 최소 하나씩은 있어야 한다 — 소모처 없이 쌓이기만 하는 재화, 획득처 없이 소모만 되는 재화는 설계 결함이다.
+Every currency needs at least one source and one sink — a currency that only accumulates with no sink, or only drains with no source, is a design flaw.
 
-## 2. 곡선의 논리를 먼저 정하고, 그다음 수치를 채운다
+## 2. Settle the curve's logic first, then fill in numbers
 
-정확한 최종 수치보다 "이 수치를 어떤 기준으로 늘릴지"가 먼저다. 예: "레벨당 필요 경험치는 이전 레벨의 1.15배씩 증가"처럼 규칙을 먼저 정한다.
+The rule for how a number scales matters more than the exact final value. E.g. settle "XP required per level increases 1.15x over the previous level" as a rule first.
 
-- **선형 증가**: 예측 가능하고 단순함. 초반 콘텐츠, 짧은 세션 게임에 적합.
-- **지수적 증가**: 후반으로 갈수록 성장이 급격히 느려짐. 장기 리텐션이 필요한 게임, 과금 유도가 필요한 구간에 적합.
-- **로그적 증가(초반 빠르고 후반 완만)**: 초반 몰입을 빠르게 만들고 싶을 때.
+- **Linear growth**: predictable, simple. Fits early content, short-session games.
+- **Exponential growth**: growth slows sharply later on. Fits games that need long-term retention or a spot to drive monetization.
+- **Logarithmic growth (fast early, gentle later)**: good for fast early immersion.
 
-초반/중반/후반 체감 난이도를 간단히 서술한다 — 표를 채우는 것보다 "플레이어가 이 시점에 뭘 느끼는가"를 말로 표현할 수 있어야 수치가 의미를 가진다.
+Briefly describe felt difficulty in the early/mid/late game — being able to say "what does the player feel at this point" matters more than just filling in a table; that's what gives the numbers meaning.
 
-## 3. BM과 연결한다
+## 3. Connect it to BM
 
-과금 모델이 이미 정해져 있다면(Game-BM 참고), 무과금 유저의 진행 속도와 과금 유저의 진행 속도를 이 곡선 위에서 구체적으로 비교한다 — 예: "무과금 기준 20레벨 도달에 14일, 과금 시 5일". 아직 BM이 안 정해졌다면 Game-BM을 먼저 쓰라고 제안해도 되고, 곡선 설계를 진행한 뒤 나중에 맞춰도 된다 — 사용자 판단에 맡긴다.
+If a monetization model is already settled (see Game-BM), concretely compare a non-paying player's progression speed against a paying player's on this curve — e.g. "non-paying: 14 days to level 20, paying: 5 days." If BM isn't settled yet, it's fine to either suggest Game-BM first or design the curve now and align it later — leave it to the user's judgment.
 
-## 4. 검증
+## 4. Validate
 
-수치를 다 채운 뒤 극단 케이스를 점검한다: 신규 유저가 첫 세션에 좌절하지 않는가, 최상위 유저가 콘텐츠를 너무 빨리 소진하지 않는가. 표로 끝내지 말고 이 두 지점을 짧게 언급한다.
+Once the numbers are filled in, check the extreme cases: does a new player get frustrated in the first session, does a top player burn through content too fast. Don't stop at the table — mention these two points explicitly.

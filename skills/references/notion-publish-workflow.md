@@ -1,57 +1,65 @@
-# 노션에 기획서 발행하기 (공통 워크플로우)
+# Publishing a Plan to Notion (shared workflow)
 
-Web-Publish, Game-Publish 스킬이 공유하는 절차. 이 스킬은 이미 대화에서 정리된(혹은 거의 완성된) 기획 내용을 노션 페이지로 옮기고 구조화하는 역할이다 — 내용을 새로 지어내지 않는다.
+Shared procedure for the Web-Publish and Game-Publish skills. This skill moves and structures plan content that's already been worked out (or nearly finished) in the conversation into a Notion page — it doesn't invent new content.
 
-**바로 직전에 같은 대화에서 Web-Plan/Game-Plan을 거쳐왔다면 `web-service.md`/`web-game.md`는 다시 읽지 않는다** — 방금 그 스킬이 읽은 내용이 아직 컨텍스트에 남아있다. 새 대화에서 시작하거나, 사용자가 이미 완성된 기획서를 붙여넣은 경우에만 필요시 다시 읽는다.
+**If Web-Plan/Game-Plan ran earlier in this same conversation, don't re-read `web-service.md`/`web-game.md`** — what that skill already read is still in context. Only re-read them if this is a new conversation, or the user pasted in an already-finished plan.
 
-## 0. 노션 MCP 연결 여부부터 확인한다
+## 0. Confirm the Notion MCP is connected
 
-이 스킬은 노션(Notion) MCP 도구(`notion-search`, `notion-create-pages` 등)가 있어야 작동한다. 사용자마다 연결 상태가 다르므로, 가장 먼저 그 도구들이 실제로 쓸 수 있는 상태인지 확인한다:
+This skill needs the Notion MCP tools (`notion-search`, `notion-create-pages`, etc.) to work. Connection status varies per user, so check first whether those tools are actually usable:
 
-- 도구 이름이 이미 목록에 보이면 (deferred 상태여도) 그대로 쓰면 된다.
-- 안 보이면 `notion`, `notion-search` 같은 키워드로 도구 검색을 한 번 시도한다.
-- 그래도 못 찾으면 노션 MCP가 연결되어 있지 않은 것이다. 이때는 **절대 다른 파일 형식으로 조용히 넘어가지 않는다** — 사용자에게 명시적으로 알린다: "노션 MCP가 연결되어 있지 않아서 노션에 바로 만들어드릴 수 없습니다. 노션을 연결하시겠어요, 아니면 마크다운 파일로 대신 만들어드릴까요?" 사용자가 마크다운을 선택하면 `web-service.md`/`web-game.md` 구조를 따라 파일로 만든다.
+- If the tool names already appear in the tool list (even in deferred state), they're usable — proceed.
+- If not, try a tool search with a keyword like `notion` / `notion-search`.
+- If still not found, the Notion MCP isn't connected. **Never silently fall back to another format** — tell the user explicitly: "Notion isn't connected, so I can't create the page there directly. Want to connect Notion, or should I save this as a markdown file instead?" If they choose markdown, build the file following the `web-service.md`/`web-game.md` structure.
 
-이 확인을 건너뛰고 바로 노션 도구를 호출하면, 연결이 안 된 사용자에게는 알 수 없는 도구 오류만 뜨고 왜 안 되는지 알려주지 못한다 — 그게 이 0단계가 필요한 이유다.
+Skipping this check and calling the Notion tools directly just produces an opaque tool error for a user who isn't connected, with no explanation of why — that's what step 0 exists to prevent.
 
-## 1. 대상 데이터베이스를 찾거나 만든다
+## 1. Find or create the target database
 
-먼저 `notion-search`로 (각 스킬이 지정한) 데이터베이스 이름이 이미 있는지 확인한다 — 사용자가 이 스킬을 이전에도 썼을 수 있다. 있으면 `notion-fetch`로 스키마를 확인하고 재사용한다. 같은 대화에서 이미 이 DB를 찾았거나 만든 적이 있다면(예: 방금 전 페이지를 발행했다면) 그 결과를 그대로 쓰고 다시 검색하지 않는다.
+**Check the local cache first** — this is what keeps repeat publishing fast (see the caching note at the end of this section). Only fall back to a live search if there's no usable cache entry.
 
-없으면 각 스킬이 명시한 스키마로 새로 만든다. **parent는 지정하지 않는다** — 이 스킬은 여러 사용자가 각자 다른 노션 워크스페이스에서 쓰므로, 특정 페이지 아래에 만들도록 하드코딩하면 안 된다. parent를 생략하면 워크스페이스 최상위 비공개 페이지로 만들어지는데, 이게 안전한 기본값이다. 단, 사용자가 대화 중에 이미 특정 위치("OO 페이지 밑에 만들어줘")를 지목했다면 그 위치를 parent로 쓴다.
+If no cache hit: search for the database name (specified by each skill) with `notion-search` first — the user may have used this skill before. If it exists, confirm the schema with `notion-fetch` and reuse it. If this database was already found or created earlier in this same conversation (e.g. a page was just published a moment ago), reuse that result — don't search again.
 
-데이터베이스를 새로 만들면, 응답에 포함된 데이터소스 ID(`<data-source>` 태그)를 페이지 생성 시 parent로 사용한다.
+If it doesn't exist, create it with the schema each skill specifies. **Don't set a parent** — this skill is used by many different users across their own separate Notion workspaces, so hardcoding a specific parent page would break for everyone else. Omitting parent creates it at the top level of the workspace as a private page, which is the safe default. The one exception: if the user already pointed at a specific location in conversation ("put it under the OO page"), use that as parent.
 
-## 2. 콘텐츠를 노션 마크다운으로 변환한다
+When a new database is created, use the data source ID from the response (the `<data-source>` tag) as the parent when creating pages in it.
 
-아래 표가 이 스킬이 실제로 쓰는 블록 문법 전부다. **이걸로 충분하면 `notion-fetch`로 전체 스펙 문서(`notion://docs/enhanced-markdown-spec`)를 다시 불러오지 않는다** — 그 문서는 오디오/비디오/탭/컬럼/동기화 블록 등 이 스킬이 쓰지 않는 내용이 대부분이라, 매번 통째로 불러오면 매 발행마다 의미 없이 토큰만 먹는다. 오디오·임베드·데이터베이스 삽입처럼 아래에 없는 걸 써야 할 때만 예외적으로 전체 스펙을 불러온다.
+**Cache it locally for next time — this is the main speed fix.** After a successful search-and-find or create, write the database name → `{database_id, data_source_id}` mapping to `.service-game-planner-notion-cache.json` in the current working directory (create the file if it doesn't exist; add to it rather than overwriting if it already has other entries). Before step 1 runs again — whether later in this conversation or in a future session, in the same working directory — read this file first. A cache hit skips straight to page creation, which is what actually cuts publish time: the `notion-search` + `notion-fetch` round trips are pure overhead once the database already exists and its schema hasn't changed. If a cached ID turns out to be stale (page creation fails because the database was deleted or moved), fall back to a live search and overwrite that entry in the cache.
 
-| 블록 | 문법 |
+## 2. Convert content into Notion markdown
+
+The table below is the entire block syntax this skill actually uses. **If this covers what's needed, don't re-fetch the full spec doc** (`notion://docs/enhanced-markdown-spec`) — that doc is mostly audio/video/tabs/columns/synced-block content this skill never touches, and pulling it in full on every publish burns tokens for no reason. Only fall back to the full spec when something outside this table is genuinely needed (audio, embeds, inline database views, etc.).
+
+| Block | Syntax |
 |---|---|
-| 헤딩 | `# 텍스트`, `## 텍스트`, `### 텍스트` (필요시 뒤에 `{color="yellow"}`) |
-| 표 | `<table header-row="true"><tr><td>셀</td></tr></table>` — 셀 안엔 일반 텍스트만, 다른 블록 못 넣음 |
-| 콜아웃 | `<callout icon="💰" color="yellow_bg">`\n`\t텍스트`\n`</callout>` — 자식은 탭으로 들여쓰기 |
-| 토글 | `<details>`\n`<summary>제목</summary>`\n`\t내용`\n`</details>` |
-| 투두 | `- [ ] 텍스트` / `- [x] 텍스트` |
-| 코드블록 | ` ```언어 ... ``` ` |
-| 굵게/기울임 | `**텍스트**` / `*텍스트*` |
-| 자주 쓰는 배경색 | `yellow_bg`, `green_bg`, `blue_bg`, `red_bg`, `gray_bg` |
+| Heading | `# text`, `## text`, `### text` |
+| Table | `<table header-row="true"><tr><td>cell</td></tr></table>` — cells hold plain text only, no nested blocks |
+| Callout | `<callout icon="💰" color="yellow_bg">`\n`\ttext`\n`</callout>` — children are tab-indented |
+| Toggle | `<details>`\n`<summary>title</summary>`\n`\tcontent`\n`</details>` |
+| To-do | `- [ ] text` / `- [x] text` |
+| Code block | ` ```language ... ``` ` |
+| Bold/italic | `**text**` / `*text*` |
 
-들여쓰기는 스페이스가 아니라 탭을 쓴다. 표 셀 안에는 헤딩이나 목록 같은 블록을 넣을 수 없다 — 텍스트만 가능.
+Indentation uses tabs, not spaces. Table cells can't contain block elements like headings or lists — text only.
 
-## 3. "한눈에 보이게" 만드는 게 핵심이다
+**Don't put a `{color=...}` tag on headings or body text.** Color is reserved for the BM callout only (see the fixed style rules below) — this is what keeps every published page visually consistent instead of each publish picking colors ad hoc.
 
-그냥 대화에서 나온 마크다운 문서를 통째로 옮기지 않는다. 노션의 장점을 살린다:
+## 3. Fixed style rules — consistency in the content, not just the container
 
-- **BM(수익화) 섹션은 콜아웃 블록으로** 감싸서 페이지를 열자마자 눈에 띄게 한다.
-- **기능 우선순위, 밸런싱 수치 같은 표는 노션 테이블로** 렌더링되게 표 문법을 그대로 쓴다.
-- **매번 볼 필요는 없는 부가 섹션(비기능 요구사항, 경쟁 분석 등)은 토글로** 접어서, 페이지를 열었을 때 핵심(컨셉·코어 기능·BM)이 먼저 보이게 한다.
-- 페이지 아이콘을 프로젝트 성격에 맞는 이모지로 지정한다.
+The page icon is free to pick per project — that part doesn't need standardizing, and forcing one fixed icon on every page isn't the point. What actually made past pages inconsistent with each other was the **content-level notation**: whether a page marks which statements are confirmed, which are assumptions, and which are still open — and if so, whether it does that the same way every time. These rules fix that:
 
-## 4. 데이터베이스 속성을 채운다
+- **Every page states a status legend once, in the opening callout, and uses it consistently for the rest of the page**: `✅` confirmed/decided, `🔶` assumption or draft proposal (not yet validated), `❓` open question (still needs a decision). Attach the relevant marker to specific claims, table rows, and list items throughout the page — not just in one section — so a reader can tell at a glance what's locked in versus still soft. This mirrors how Web-Plan/Game-Plan and Web-DeepSearch/Game-DeepSearch already distinguish confirmed facts from guesses; carrying that same distinction into the Notion page (instead of flattening everything to the same confident tone) is the actual point of this rule.
+- **Don't add a `{color=...}` tag to headings just for visual variety.** A different color per section with no fixed meaning behind it (section 1 red, section 2 blue, section 3 purple, etc.) is decoration, not information, and it's exactly the kind of thing that makes one page look different from the next for no reason. If a heading's content is genuinely a warning or a decision point, say so in the text or use a callout — don't lean on rotating colors to do that work.
+- **BM/monetization callout**: always `icon="💰"`, always `color="yellow_bg"` — this one callout is worth a fixed, memorable treatment since it's the section users care most about scanning for.
+- **Priority tables, balancing tables**: rendered as real Notion tables (not toggled, not summarized into prose) — always visible on open.
+- **Secondary sections** (non-functional requirements, competitor analysis, retention/live-ops, art & tone, etc. — anything not needed on every read): wrapped in a toggle, collapsed by default.
 
-제목, 상태(기본값 "초안"), 분류(카테고리/장르), BM 한줄요약을 페이지 속성으로 채운다. BM 한줄요약은 본문 문장을 그대로 복사하는 게 아니라, 목록에서 훑어볼 때 바로 이해되도록 한 문장으로 압축한다.
+**A toggle/callout/table changes the container, not the amount of content.** Specific content from the original doc — acceptance criteria checklists in particular — gets moved over item by item, not compressed into "a summary callout of the key points." Putting something in a toggle doesn't mean shortening the text inside it — it's collapsed, but expanding it should show the same length as the source. If the Notion page has less content than the source markdown, something was moved over wrong.
 
-## 5. 결과를 알려준다
+## 4. Pass over the prose once before publishing
 
-생성된 노션 페이지 URL을 사용자에게 전달한다. 이후 내용이 바뀌면(예: "밸런싱 다시 짰으니까 노션 문서도 업데이트해줘") 새 페이지를 또 만들지 말고 `notion-update-page`로 같은 페이지를 갱신한다.
+Once the page content is written, right before sending it to Notion, run it past the `natural-writing.md` checklist once. No new call, no separate tool — just look at what was just written and fix only the mechanically-repetitive or cliché parts on the spot. Leave the table/callout/toggle structure alone.
+
+## 5. Report the result
+
+Give the user the created Notion page URL. If the content changes later (e.g. "I reworked the balancing, update the Notion doc too"), don't create a new page — update the same one with `notion-update-page`.

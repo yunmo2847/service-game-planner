@@ -1,39 +1,43 @@
 ---
 name: Game-Publish
-description: 완성되었거나 거의 완성된 웹게임 GDD를 노션(Notion) 페이지로 발행해 한눈에 보이게 정리할 때 사용. "노션에 정리해줘", "이 GDD 노션에 만들어줘" 같은 요청에 사용. Game-Plan 마무리 직후 저장 옵션으로도 제안.
+description: Use to publish a finished or near-finished web game GDD to a Notion page for at-a-glance viewing. Use for requests like "write this up in Notion", "put this GDD in Notion" ("노션에 정리해줘", "이 GDD 노션에 만들어줘"). Also suggest this as a save option right after Game-Plan wraps up.
 ---
 
 # Game-Publish
 
-Game-Plan(필요하면 Game-DeepSearch, Game-BM, Game-Balance)으로 정리된 웹게임 기획 내용을 노션 데이터베이스에 페이지로 발행하는 스킬.
+Publishes web game plan content worked out via Game-Plan (and, if used, Game-DeepSearch, Game-BM, Game-Balance) as a page in a Notion database.
 
-공통 절차는 `../references/notion-publish-workflow.md`를 읽고 따른다.
+**Write the page content in the language the user is using with you (Korean by default).** These instructions are in English only for maintainability; it's not a cue to answer in English.
 
-## 데이터베이스
+Follow the shared procedure in `../references/notion-publish-workflow.md`.
 
-이름: **웹게임 기획 아카이브**. 없으면 아래 스키마로 만든다.
+## Database
+
+Name: **웹게임 기획 아카이브** (Web Game Plan Archive). Create it with this schema if it doesn't exist:
 
 ```
 CREATE TABLE ("이름" TITLE, "상태" SELECT('아이디어':gray,'초안':yellow,'진행중':blue,'완료':green), "장르" SELECT('방치형':blue,'퍼즐':purple,'RPG':orange,'PvP/경쟁':red,'캐주얼':green,'기타':default), "BM 한줄요약" RICH_TEXT)
 ```
 
-장르가 후보에 없으면 "기타"를 쓰고, 필요하면 옵션을 새로 추가해도 된다.
+If the game doesn't fit an existing genre, use "기타" (other) — add a new option if needed.
 
-## 페이지 구조
+## Page structure
 
-`../references/web-game.md`의 섹션 순서를 따르되 노션 문법으로 다시 표현한다:
+Follow `../references/web-game.md`'s section order, re-expressed in Notion syntax:
 
-- 1~3번(개요, 코어 루프, 핵심 메카닉)은 페이지를 열었을 때 바로 보이게 그대로 둔다
-- 9번(수익화)은 콜아웃 블록으로 강조한다
-- 5번 밸런싱 표는 노션 테이블로 만든다
-- 7번(리텐션/라이브옵스), 10번(아트 & 톤)처럼 매번 볼 필요는 없는 섹션은 토글로 접는다
+- Sections 1-3 (overview, core loop, core mechanics) stay visible immediately on opening the page
+- Section 9 (monetization) gets the fixed BM callout treatment
+- The section-5 balancing table becomes a Notion table
+- Sections that don't need to be seen every time — 7 (retention/live-ops), 10 (art & tone) — go in toggles
 
-**토글/콜아웃/표는 담는 그릇만 바꾸는 것이지, 내용을 줄이는 게 아니다.** 원본 GDD의 구체적인 내용(수치, 근거, 리스트)은 노션으로 옮길 때도 그대로 옮긴다 — 요약해서 압축하지 않는다. 토글로 접는다고 해서 그 안의 텍스트 양을 줄여도 되는 게 아니다 — 접혀 있을 뿐 펼치면 원래 분량 그대로여야 한다. 노션 페이지가 원본보다 내용이 적다면 잘못 옮긴 것이다.
+See `notion-publish-workflow.md` for the status-legend/color rules and the "don't shrink content" rule — both apply here without exception.
 
-## 올리기 전에 문체를 한 번 훑는다
+## Pass over the prose once before publishing
 
-페이지 내용을 다 쓴 뒤, 노션에 올리기 직전에 `../references/natural-writing.md` 체크리스트로 한 번 훑는다. 새 호출이나 별도 도구 없이, 방금 쓴 문장 중 기계적으로 반복되거나 클리셰인 부분만 그 자리에서 고친다 — 표/콜아웃/토글 구조는 건드리지 않는다.
+Once the page content is written, right before sending it to Notion, run it past the `../references/natural-writing.md` checklist once — no new call, no separate tool. Fix only the mechanically-repetitive or cliché sentences on the spot; leave the table/callout/toggle structure alone.
 
-## 완료 후
+## After it's done
 
-생성된 노션 페이지 URL을 사용자에게 알려준다. 이후 내용이 바뀌면 새로 만들지 말고 같은 페이지를 업데이트한다.
+Give the user the created Notion page URL. If the content changes later, don't create a new page — update the same one.
+
+If the GDD is genuinely finished (not just a draft), it's fine to mention the `marketer` agent as an option for turning it into a store listing/announcement post — but only offer it once, and only call it if the user actually asks.

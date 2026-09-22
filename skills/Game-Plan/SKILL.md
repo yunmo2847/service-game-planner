@@ -1,38 +1,43 @@
 ---
 name: Game-Plan
-description: 브라우저 웹게임(HTML5/WebGL) 기획을 소크라테스식 질문으로 설계하고 정식 GDD까지 정리할 때 사용. "웹게임 기획해줘", "코어 루프 잡아줘", "GDD 만들어줘" 같은 요청에 사용. 명시적 요청 없이도 새 웹게임 아이디어를 구체화하는 대화면 트리거. 일반 웹서비스 기획은 Web-Plan을 쓴다 (게임 안 상점/커뮤니티 요소가 섞이면 Web-Plan도 함께 참고).
+description: Use to design a browser web game (HTML5/WebGL) plan through Socratic questioning and turn it into a formal GDD. Use for requests like "plan out a web game", "nail down the core loop", "write the GDD" ("웹게임 기획해줘", "코어 루프 잡아줘", "GDD 만들어줘"). Also triggers without an explicit request whenever the conversation is fleshing out a new web game idea. For plain web service planning, use Web-Plan (if a game has shop/community elements, consult Web-Plan too).
 ---
 
 # Game-Plan
 
-파편적인 웹게임 아이디어를 구조화된 기획서(GDD)로 바꾸는 스킬. 사용자가 부르는 대로 받아적지 않고, 질문을 통해 스스로 결정을 명확히 하도록 돕는다.
+Turns a fragmented web game idea into a structured plan (GDD). Doesn't just transcribe whatever the user says — asks questions that help the user clarify their own decisions.
 
-## 1. 소크라테스식으로 인터뷰한다
+**Write everything you produce for the user — questions, the GDD itself — in the language the user is using with you (Korean by default).** These instructions are in English only for maintainability; it's not a cue to answer in English.
 
-`../references/socratic-method.md`를 읽고 그 방식을 따른다. 질문은 1~3개씩, 표면적 요구 뒤의 "왜"를 한 번은 확인하고, 막히면 질문을 멈추고 가정을 명시한 초안을 먼저 보여준다. 같은 대화에서 이미 `socratic-method.md`/`web-game.md`를 읽은 뒤라면(예: 시스템 하나만 다듬어달라는 후속 요청), 다시 읽지 않고 컨텍스트에 남아있는 내용을 그대로 참고한다 — 매 후속 요청마다 같은 파일을 또 읽는 건 의미 없는 토큰 낭비다.
+## 1. Interview Socratically
 
-**코어 루프를 가장 먼저, 가장 확실하게 정한다.** 코어 루프가 불명확하면 나머지 시스템(진행, 밸런싱, 콘텐츠)을 아무리 정교하게 짜도 게임이 붕 뜬다. "이 루프를 왜 반복하고 싶어질까요?"를 코어 루프 확정 전에 반드시 확인한다.
+Read `../references/socratic-method.md` and follow it. Ask 1-3 questions at a time, dig into the "why" behind the surface request at least once, and if the user gets stuck, stop asking and show a draft with assumptions labeled instead. If `socratic-method.md`/`web-game.md` were already read in this same conversation (e.g. this is a follow-up request to polish a single system), don't re-read them — work from what's still in context. Re-reading the same file on every follow-up is pure token waste.
 
-**BM(수익모델)도 인터뷰 초반에 방향만이라도 확인한다.** "무료로 즐기는 실험작인가요, 상업적으로 수익을 낼 목적인가요? 낸다면 광고/IAP/배틀패스 중 감이 있나요?" — 상업적 목적이라면 이 답이 코어 루프와 진행 시스템 설계(과금 유도 지점을 어디에 자연스럽게 놓을지)에 계속 영향을 준다.
+**Settle the core loop first, and settle it solidly.** If the core loop is unclear, no amount of polish on the rest (progression, balance, content) will save the game. Always confirm "why would this loop want to be repeated?" before locking the core loop in.
 
-## 2. 기획서(GDD)로 정리한다
+**Also check BM (business model) direction early in the interview.** "Is this a free experiment, or does it need to make commercial revenue? If commercial, do you have a sense of ads/IAP/battle-pass?" — if it's commercial, the answer keeps shaping the core loop and progression design (where the payment trigger naturally sits) going forward.
 
-`../references/web-game.md`의 섹션 구조를 뼈대로 따른다. 소규모 프로젝트라면 리텐션/라이브옵스 같은 섹션은 생략해도 된다 — 템플릿은 규격이 아니다.
+## 2. Write it up as a plan (GDD)
 
-수익화 섹션은 상업적 프로젝트라면 다른 섹션과 동등한 비중으로 다룬다. 광고/IAP/배틀패스 중 후보를 비교하고 추천 근거를 남긴다. 더 깊은 BM 설계(가격, 무과금-과금 격차, 지표 목표)가 필요하면 Game-BM 스킬을, 실제 수치 밸런싱(재화 획득/소모, 성장 곡선)이 필요하면 Game-Balance 스킬을 사용자에게 제안한다.
+Use `../references/web-game.md`'s section structure as the skeleton. For a small project, sections like retention/live-ops can be dropped — the template isn't a spec to satisfy.
 
-레퍼런스 게임, 장르 트렌드, 유사 게임의 수익모델처럼 실제 데이터가 필요하면 추측으로 채우지 말고 Game-DeepSearch 스킬 사용을 제안한다.
+Give the monetization section weight equal to the others if the project is commercial. Compare candidates among ads/IAP/battle-pass and record the reasoning. Suggest the Game-BM skill when deeper BM design is needed (pricing, free-to-pay gap, metric targets), and Game-Balance when the gap needs to become actual numbers (currency sources/sinks, growth curves).
 
-짧은 브레인스토밍이나 시스템 하나만 다듬는 작업은 대화로 충분하다. 하지만 정식 GDD 수준으로 내용이 갖춰지면, 그 자리에서 끝내지 말고 어디에 남길지 정한다 — 기본값은 Notion이다. Game-Publish 스킬로 이어서 노션에 정리해줄지 물어본다 (노션 MCP가 연결되어 있지 않다면 마크다운 파일로 대체 제공한다).
+Where real data is needed (reference games, genre trends, comparable games' BM), don't fill it in with a guess — suggest the Game-DeepSearch skill to the user.
 
-## 3. 출력 전 점검 (직접 한다 — 서브에이전트 없이)
+A short brainstorm or a single-system polish is fine to leave in conversation. But once the content reaches formal-GDD quality, don't just leave it there — decide where it lives. The default is Notion. Ask whether to continue into the Game-Publish skill to write it up there (if the Notion MCP isn't connected, offer a markdown file instead).
 
-문서를 내놓기 전에 "이걸 읽고 다른 사람이 바로 작업을 시작할 수 있는가"를 기준으로 스스로 점검한다. 코어 루프의 재미 요인이 추상적 선언에 머물지 않고 구체적 메카닉으로 뒷받침되는지 확인한다.
+## 3. Check before delivering (do this yourself — no subagent)
 
-진행 중인 기획을 이어가는 경우, 이전에 확정된 설정과 모순되지 않게 확장한다.
+Before handing over the document, check it yourself against "could someone else start working from this immediately?" Confirm the core loop's fun factor rests on concrete mechanics, not just an abstract claim.
 
-## 4. 더 꼼꼼한 검토는 사용자가 원할 때만, 리뷰어 1명으로 제안한다
+If this continues an in-progress plan, extend it without contradicting settings already locked in.
 
-정식 GDD를 다 정리한 뒤에는, 서브에이전트를 자동으로 부르지 않는다. 서브에이전트는 하나를 띄우는 것만으로도 도구 스키마 로딩 등 고정비용이 붙는다 — 짧은 검토 작업 하나에 그 고정비용을 여러 번(리뷰어를 여러 명 병렬로) 치르는 건 낭비다. 그래서 리뷰어는 세 관점(코어루프·구현난이도·BM)을 한 사람이 다 보는 `game-plan-reviewer` **한 명**으로 통합해뒀다.
+## 4. Deeper checks are opt-in only, one specialist at a time
 
-짧게 한 줄로 제안만 한다: "더 꼼꼼하게 보고 싶으면 교차검토를 한 번 받을 수도 있어요 — 시간이 좀 더 걸립니다." 사용자가 원한다고 답했을 때만 Agent 도구로 `game-plan-reviewer`를 **한 번** 호출한다. 이때 초안 전체를 파일 경로가 아니라 **프롬프트에 텍스트로 직접 붙여** 넘긴다 — 리뷰어가 다른 파일을 찾아 읽으러 다니지 않게 하려는 것이다. 리뷰어는 초안을 고치지 않고 지적만 돌려주며, 돌아온 지적 중 실제로 반영할 것만 골라 반영한다. 이미 잘 나온 GDD를 억지로 늘리지 않는다.
+Once the formal GDD is finished, don't automatically call a subagent — the fixed cost of spinning one up (tool-schema loading, etc.) isn't worth paying automatically for a short task, and it's definitely not worth paying multiple times in parallel. Two opt-in options exist; offer them as short one-liners and only call one when the user actually asks for it, **passing the draft as inline text in the prompt** (not a file path) so the subagent doesn't go hunting for other files to read:
+
+- **`game-plan-reviewer`** — a document review across three lenses at once (core loop / implementation difficulty / BM). "If you want a more thorough look, I can run a cross-check review — it'll take a bit longer."
+- **`game-tester`** — a different lens: not "is the document complete," but "how would this actually feel to play" (onboarding confusion, pacing spikes, exploitable loopholes). Offer this once the GDD is far enough along that a real system exists to playtest. "Want me to mentally playtest this and flag where a real player would get stuck or find an exploit?"
+
+Neither is called automatically, and don't call both back-to-back unless the user asks for both — each is its own subagent cost. Both only report findings; they don't edit the draft, and only findings the user agrees are worth applying get folded back in.

@@ -1,30 +1,30 @@
-# 웹서비스 BM(수익모델) 설계 참고
+# Web Service BM (Business Model) Reference
 
-Web-BM 스킬, 그리고 Web-Plan의 BM 섹션에서 참고한다.
+Used by the Web-BM skill, and by Web-Plan's BM section.
 
-## 흔한 웹서비스 수익모델
+## Common web service revenue models
 
-| 모델 | 핵심 아이디어 | 잘 맞는 경우 | 리스크 |
+| Model | Core idea | Good fit for | Risk |
 |---|---|---|---|
-| 구독 (SaaS) | 월/연 정액 | 반복적으로 가치를 주는 도구/서비스 | 초반 유저가 지불 전환을 안 하면 성장 정체 |
-| 프리미엄 (Freemium) | 기본 무료 + 고급 기능 유료 | 유저 기반을 먼저 키워야 하는 경우 | 무료 기능이 너무 좋으면 유료 전환 안 됨 |
-| 거래 수수료 (마켓플레이스) | 거래 성사 시 % 수수료 | 공급자-수요자 매칭 서비스 | 초기 양면시장(공급/수요) 콜드스타트 문제 |
-| 광고 | 트래픽 기반 노출/클릭 수익 | 무료 대량 트래픽 확보 가능한 서비스 | 트래픽 규모가 작으면 사실상 무의미한 수익 |
-| 리드/데이터 연결 | 유저 문의를 파트너사에 연결 | B2B 매칭, 비교 서비스 | 개인정보/신뢰 문제, 법적 이슈 확인 필요 |
-| 일회성 결제 | 툴/템플릿/에셋 등을 1회 구매 | 사용 빈도가 낮은 툴, 소규모 프로젝트 | LTV가 낮음, 지속 수익 구조 아님 |
+| Subscription (SaaS) | Flat monthly/annual fee | Tools/services that deliver value repeatedly | Growth stalls if early users don't convert to paid |
+| Freemium | Free core + paid advanced features | Needs to build a user base first | Free tier too generous → no reason to upgrade |
+| Transaction fee (marketplace) | % cut on completed transactions | Supply-demand matching services | Cold-start problem on both sides of the market early on |
+| Advertising | Revenue from traffic-based impressions/clicks | Services that can pull large free traffic | Small traffic makes this revenue effectively meaningless |
+| Lead / data connection | Connects user inquiries to partner companies | B2B matching, comparison services | Privacy/trust concerns, check legal exposure |
+| One-time purchase | Single purchase of a tool/template/asset | Low-frequency-use tools, small projects | Low LTV, not a recurring revenue structure |
 
-실제로는 여러 개를 조합하는 경우가 더 많다 (예: 프리미엄 + 광고).
+Combining several is more common in practice than picking just one (e.g. freemium + ads).
 
-## 가격 설계 시 물어야 할 것
+## Questions to ask when designing pricing
 
-- 유사 서비스는 얼마를 받고 있는가 (모르면 Web-DeepSearch로 조사)
-- 타겟 유저가 이 문제 때문에 지금 무엇에 얼마를 쓰고 있는가 (기존 대안의 비용이 가격 앵커가 된다)
-- 무료 티어에서 유료 전환을 유도하는 트리거는 무엇인가 (사용량 한도? 고급 기능? 팀 기능?)
+- What are similar services charging (use Web-DeepSearch to find out if unknown)?
+- What is the target user spending money on right now for this same problem (the cost of existing alternatives anchors the price)?
+- What triggers conversion from the free tier (usage caps? advanced features? team features?)?
 
-## 최소한으로 언급할 지표
+## Minimum metrics to state
 
-전문 재무 모델링까지 갈 필요는 없지만, 기획서에는 최소한 아래를 숫자든 방향성이든 명시한다:
+Full financial modeling isn't necessary, but the plan should state at least the following, in numbers or direction:
 
-- **전환율 목표**: 무료 → 유료 전환율 몇 %를 목표로 하는가
-- **핵심 수익 지표**: MRR, ARPU 등 이 서비스에서 추적할 지표 1~2개
-- **손익분기 감**: 대략 몇 명의 유료 유저/거래가 있어야 운영비를 커버하는지 (정확한 계산이 아니어도 자릿수 감각은 있어야 함)
+- **Conversion target**: what % free-to-paid conversion is the goal
+- **Core revenue metric(s)**: 1-2 metrics to track (MRR, ARPU, etc.)
+- **Rough break-even sense**: roughly how many paying users/transactions are needed to cover operating cost (doesn't need to be precise, but should be right in order of magnitude)

@@ -1,64 +1,64 @@
-# 웹서비스 기획서 구조
+# Web Service Plan Structure
 
-아래 섹션을 기본 뼈대로 채운다. 프로젝트 규모나 성격에 안 맞는 섹션은 생략해도 된다 — 특히 개인 프로젝트/MVP 단계에서는 8~9번은 생략하는 경우가 많다.
+Use the sections below as the default skeleton. Skip sections that don't fit the project's scale — sections 7-8 are often skipped for personal projects/early MVPs in particular.
 
-## 1. 서비스 개요
-- 한 줄 정의: 누구를 위해, 무엇을, 어떻게 해결하는 서비스인지
-- 문제 정의: 이 서비스가 없으면 타겟 유저가 지금 어떤 불편을 겪고 있는지 (기존 대안이 있다면 그 대안의 한계도)
-- 핵심 가치 제안: 왜 이 서비스를 써야 하는지 한 문장
+## 1. Service Overview
+- One-line definition: who it's for, what it solves, and how
+- Problem statement: what pain the target user has right now without this service (and the limits of any existing alternative, if one exists)
+- Core value proposition: one sentence on why someone would use this
 
-## 2. 타겟 사용자
-- 주 타겟 페르소나 (연령대, 상황, 니즈 — 인구통계보다 "어떤 상황에 처한 사람인지"가 더 중요)
-- 구체적인 사용 시나리오 1~2개 (예: "OO한 크리에이터가 방송 끝나고 하이라이트를 뽑을 때")
-- (BM 가정) 이 타겟이 실제로 지갑을 여는 유저인지, 아니면 별도의 결제 주체(광고주 등)가 있는지 여기서 한 줄로 가정해둔다 — 8번에서 구체화한다.
+## 2. Target Users
+- Primary persona (age range, situation, need — "what situation is this person in" matters more than raw demographics)
+- 1-2 concrete usage scenarios (e.g. "a streamer pulling highlight clips right after a broadcast ends")
+- (BM assumption) Note in one line here whether this target is the one who actually pays, or whether there's a separate paying party (e.g. advertisers) — flesh this out in section 8.
 
-## 3. 핵심 기능 (우선순위)
-표로 정리한다:
+## 3. Core Features (Priority)
+Lay out as a table:
 
-| 기능 | 설명 | 우선순위 (Must/Should/Could) | 비고 |
+| Feature | Description | Priority (Must/Should/Could) | Notes |
 |---|---|---|---|
 | | | | |
 
-MVP에 반드시 필요한 기능과, 있으면 좋지만 나중에 추가해도 되는 기능을 명확히 구분한다. 우선순위가 애매하면 "이 기능이 없어도 핵심 가치 제안이 성립하는가?"로 판단한다.
+Clearly separate what the MVP absolutely needs from what's nice-to-have and can wait. When priority is unclear, use the test: "does the core value proposition still hold without this feature?"
 
-## 4. 유저 플로우
-주요 시나리오별로 화면-화면 흐름을 순서대로 나열한다.
-예: 랜딩 → 회원가입 → 온보딩 → 핵심 기능 사용 → 결과 확인/공유
+## 4. User Flow
+List the screen-to-screen flow in order for each major scenario.
+Example: Landing → Sign-up → Onboarding → Use core feature → View/share result
 
-이탈이 일어날 만한 지점(복잡한 입력, 대기 시간, 결제 단계 등)이 있다면 짚어준다.
+Call out any point where users are likely to drop off (complex input, waiting, checkout, etc.).
 
-## 5. 정보구조 / 화면 구성
-사이트맵 형태로 주요 화면과 하위 화면을 계층적으로 정리한다.
+## 5. Information Architecture / Screen Structure
+Lay out major screens and sub-screens hierarchically, like a sitemap.
 ```
-홈
-├── 대시보드
-├── 프로젝트
-│   ├── 프로젝트 상세
-│   └── 설정
-└── 마이페이지
+Home
+├── Dashboard
+├── Projects
+│   ├── Project Detail
+│   └── Settings
+└── My Page
 ```
 
-## 6. 기능 명세
-핵심 기능마다 다음 형식으로 정리한다:
-- **사용자 스토리**: "~로서, ~하고 싶다. 왜냐하면 ~하기 때문이다."
-- **완료 조건 (Acceptance Criteria)**: 이 기능이 "완성됐다"고 판단할 구체적 기준 (체크리스트 형태 권장)
+## 6. Feature Specification
+For each core feature, fill in:
+- **User story**: "As a ___, I want to ___, because ___."
+- **Acceptance criteria**: the concrete bar for "this feature is done" (checklist form is best)
 
-## 7. 비기능 요구사항
-프로젝트에 실제로 중요한 항목만 다룬다. 모든 서비스에 전부 필요한 건 아니다.
-- 성능: 응답 속도, 동시 접속 처리 목표
-- 보안: 인증/권한 체계, 민감정보 처리 방식
-- 확장성: 트래픽/데이터 증가에 대한 대비 수준
+## 7. Non-Functional Requirements
+Cover only what actually matters for this project — not every service needs all of these.
+- Performance: response time targets, concurrent-user handling
+- Security: auth/authorization model, how sensitive data is handled
+- Scalability: how much headroom is needed for traffic/data growth
 
-## 8. 수익화 / 비즈니스 모델
-다른 섹션과 동등하거나 그 이상의 비중으로 다룬다 — 결국 돈을 벌려고 만드는 서비스라면, BM이 기능 우선순위를 결정하는 기준이 되어야 한다. 후보를 2~3개 비교하고 추천 근거를 남긴다(모델 종류는 `bm-web.md` 참고). 더 깊게 설계해야 하면(가격, 전환 퍼널, 지표) Web-BM 스킬을 사용한다.
+## 8. Monetization / Business Model
+Give this section weight equal to or greater than the others — if the service exists to make money, BM should be the standard that drives feature priority, not an afterthought. Compare 2-3 candidate models and record the reasoning for the recommendation (see `bm-web.md` for model types). Use the Web-BM skill when this needs to go deeper (pricing, conversion funnel, metrics).
 
-- **수익모델**: 어떻게 수익을 내는지, 혹은 수익화가 목적이 아니라면 이 프로젝트의 "성공"이 무엇을 의미하는지
-- **가격/전환 지점**: 무료-유료 경계가 있다면 어디서 전환을 유도하는지
-- **핵심 수익 지표**: 이 서비스에서 추적할 지표 1~2개 (MRR, ARPU 등)
+- **Revenue model**: how it makes money, or — if monetization isn't the goal — what "success" means for this project instead
+- **Pricing / conversion point**: if there's a free-to-paid boundary, where the conversion is triggered
+- **Core revenue metric(s)**: 1-2 metrics this service should track (MRR, ARPU, etc.)
 
-## 9. 성공 지표 (KPI)
-이 서비스가 잘 되고 있다는 걸 무엇으로 판단할지.
-예: 가입 전환율, 재방문율(WAU/MAU), 핵심 기능 사용률, 완료율
+## 9. Success Metrics (KPIs)
+What tells you this service is working.
+Example: sign-up conversion rate, return rate (WAU/MAU), core-feature usage rate, completion rate
 
-## 10. 경쟁/유사 서비스
-있다면 2~3개를 언급하고, 이 서비스가 차별화되는 지점을 짧게 정리한다. 없다면 생략 가능.
+## 10. Competitors / Similar Services
+Mention 2-3 if they exist, and briefly note where this service differentiates. Skip if there's nothing comparable.

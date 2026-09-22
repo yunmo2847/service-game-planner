@@ -4,7 +4,7 @@
     "name": "yunmo2847"
   },
   "metadata": {
-    "description": "웹서비스/웹게임 기획을 소크라테스식 질문으로 구체화하고 노션에 정리하는 스킬 마켓플레이스",
+    "description": "A skill marketplace for planning web services/web games through Socratic questioning and organizing them in Notion. / 웹서비스·웹게임 기획을 소크라테스식 질문으로 구체화하고 노션에 정리하는 스킬 마켓플레이스",
     "version": "0.1.0",
     "pluginRoot": "."
   },
@@ -12,7 +12,7 @@
     {
       "name": "service-game-planner",
       "source": "./",
-      "description": "웹서비스/웹게임 기획을 소크라테스식 질문으로 구체화하고, 실제 리서치와 수익모델(BM) 설계를 거쳐 노션에 한눈에 보이게 정리하는 스킬 모음.",
+      "description": "Plans web services and web games through Socratic questioning, backs it with real research and business-model (BM) design, and organizes it clearly in Notion. / 웹서비스·웹게임 기획을 소크라테스식 질문으로 구체화하고, 실제 리서치와 수익모델(BM) 설계를 거쳐 노션에 한눈에 보이게 정리하는 스킬 모음.",
       "version": "0.1.0",
       "keywords": ["기획", "planning", "gdd", "prd", "notion", "game-design", "web-service"]
     }

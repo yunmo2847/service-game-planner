@@ -1,40 +1,42 @@
 ---
 name: Web-Plan
-description: 웹서비스/웹 플랫폼(SaaS, 커머스, 크리에이터 툴 등) 기획을 소크라테스식 질문으로 설계하고 정식 PRD까지 정리할 때 사용. "웹서비스 기획해줘", "MVP 범위 정해줘", "기능 우선순위 정리해줘" 같은 요청에 사용. 명시적 요청 없이도 새 웹서비스 아이디어를 구체화하는 대화면 트리거. 게임 자체 기획은 Game-Plan을 쓴다 (게임 안 상점/커뮤니티 요소가 섞이면 Game-Plan도 함께 참고).
+description: Use to design a web service/platform plan (SaaS, e-commerce, creator tools, etc.) through Socratic questioning and turn it into a formal PRD. Use for requests like "plan out a web service", "define the MVP scope", "prioritize the features" ("웹서비스 기획해줘", "MVP 범위 정해줘", "기능 우선순위 정리해줘"). Also triggers without an explicit request whenever the conversation is fleshing out a new web service idea. For the game itself, use Game-Plan (if a web game has shop/community elements, consult Web-Plan too).
 ---
 
 # Web-Plan
 
-파편적인 웹서비스 아이디어를 구조화된 기획서로 바꾸는 스킬. 사용자가 부르는 대로 받아적는 게 아니라, 질문을 통해 사용자 스스로 결정을 명확히 하도록 돕는다.
+Turns a fragmented web service idea into a structured plan. Doesn't just transcribe whatever the user says — asks questions that help the user clarify their own decisions.
 
-## 1. 소크라테스식으로 인터뷰한다
+**Write everything you produce for the user — questions, the plan document itself — in the language the user is using with you (Korean by default).** These instructions are in English only for maintainability; it's not a cue to answer in English.
 
-`../references/socratic-method.md`를 읽고 그 방식을 따른다. 핵심만 요약하면: 질문은 1~3개씩, 표면적 요구 뒤의 "왜"를 한 번은 확인하고, 사용자가 막히면 질문을 멈추고 가정을 명시한 초안을 먼저 보여준다.
+## 1. Interview Socratically
 
-**BM(수익모델)은 인터뷰 초반, 늦어도 타겟 사용자를 정한 직후에 한 번은 반드시 묻는다.** "이걸로 어떻게 돈을 벌 건가요? 수익화가 목적이 아니라면 이 프로젝트의 '성공'은 뭘로 판단하나요?" — 이 답이 이후 기능 우선순위를 정하는 기준이 된다. BM을 문서 맨 끝에 형식적으로 붙이는 섹션으로 취급하지 않는다.
+Read `../references/socratic-method.md` and follow it. In short: ask 1-3 questions at a time, dig into the "why" behind the surface request at least once, and if the user gets stuck, stop asking and show a draft with assumptions labeled instead.
 
-이미 대화에서 나온 내용(컨셉, 타겟, 아이디어 등)은 다시 묻지 않는다. 같은 대화에서 이미 `socratic-method.md`/`web-service.md`를 읽은 뒤라면(예: 특정 섹션 하나만 다듬어달라는 후속 요청), 다시 읽지 않고 컨텍스트에 남아있는 내용을 그대로 참고한다 — 매 후속 요청마다 같은 파일을 또 읽는 건 의미 없는 토큰 낭비다.
+**Ask about BM (business model) early — no later than right after the target user is confirmed.** "How does this make money? If monetization isn't the goal, what counts as 'success' for this project?" — the answer becomes the standard for feature priority later. Don't treat BM as a formality tacked onto the end of the document.
 
-## 2. 기획서로 정리한다
+Don't re-ask about anything already covered in conversation (concept, target, ideas, etc.). If `socratic-method.md`/`web-service.md` were already read in this same conversation (e.g. this is a follow-up request to polish a single section), don't re-read them — work from what's still in context. Re-reading the same file on every follow-up is pure token waste.
 
-`../references/web-service.md`의 섹션 구조를 뼈대로 따른다. 프로젝트 성격에 안 맞는 섹션은 빼고, 필요한 섹션은 추가한다 — 템플릿은 규격이 아니다.
+## 2. Write it up as a plan
 
-BM(수익화) 섹션은 다른 섹션과 동등하거나 그 이상의 비중으로 다룬다. 후보 모델을 1개만 던지지 말고 최소 2~3개를 비교한 뒤 추천 근거를 남긴다. 더 깊은 BM 설계(가격 정책, 전환 퍼널, 지표 목표)가 필요하면 사용자에게 Web-BM 스킬 사용을 제안한다.
+Use `../references/web-service.md`'s section structure as the skeleton. Drop sections that don't fit the project, add ones that are needed — the template isn't a spec to satisfy.
 
-경쟁 서비스, 시장 가격대, 유사 사례처럼 실제 데이터가 필요한 부분이 있으면 추측으로 채우지 말고 Web-DeepSearch 스킬 사용을 사용자에게 제안한다.
+Give the BM (monetization) section equal or greater weight than the others. Don't present just one candidate model — compare at least 2-3 and record the reasoning for the recommendation. Suggest the Web-BM skill when deeper BM design is needed (pricing, conversion funnel, metric targets).
 
-짧은 브레인스토밍이나 섹션 하나만 다듬는 작업은 대화로 충분하다. 하지만 정식 기획서 수준으로 내용이 갖춰지면, 그 자리에서 끝내지 말고 어디에 남길지 정한다 — 기본값은 Notion이다. Web-Publish 스킬로 이어서 노션에 정리해줄지 물어본다 (노션 MCP가 연결되어 있지 않다면 마크다운 파일로 대체 제공한다).
+Where real data is needed (competitors, market pricing, comparable cases), don't fill it in with a guess — suggest the Web-DeepSearch skill to the user.
 
-## 3. 출력 전 점검 (직접 한다 — 서브에이전트 없이)
+A short brainstorm or a single-section polish is fine to leave in conversation. But once the content reaches formal-plan quality, don't just leave it there — decide where it lives. The default is Notion. Ask whether to continue into the Web-Publish skill to write it up there (if the Notion MCP isn't connected, offer a markdown file instead).
 
-문서를 내놓기 전에 "이걸 읽고 다른 사람이 바로 작업을 시작할 수 있는가"를 기준으로 스스로 점검한다. 추상적 선언("사용자 친화적인 UI")보다 구체적 기준("3클릭 이내 핵심 기능 도달")이 되어 있는지 확인하고, 뭉뚱그려진 부분은 되물어 채운다.
+## 3. Check before delivering (do this yourself — no subagent)
 
-**기능 명세 섹션을 특히 의심한다.** 정식 기획서인데 기능마다 설명이 한두 문장뿐이고 완료 조건(체크리스트)이 없다면, 요약만 하고 실제 내용은 안 채운 것이다 — 기능명 나열로 끝내지 말고, 개발자가 "이게 끝났다"고 판단할 기준을 실제로 적는다. 이 점검을 건너뛰면 문서가 겉보기엔 깔끔한데 속은 비어 보이는 결과가 나온다.
+Before handing over the document, check it yourself against "could someone else start working from this immediately?" Look for abstract claims ("user-friendly UI") that should be concrete criteria ("core feature reachable within 3 clicks"), and ask follow-up questions to fill in anything left vague.
 
-진행 중인 기획을 이어가는 경우, 이전에 확정된 결정과 모순되지 않게 확장한다.
+**Be especially suspicious of the feature spec section.** If this is meant to be a formal plan but each feature only gets a sentence or two with no acceptance criteria (checklist), it's been summarized rather than actually filled in — don't stop at listing feature names; write down the actual bar a developer would use to call it "done." Skipping this check is how a document ends up looking polished on the surface but hollow underneath.
 
-## 4. 더 꼼꼼한 검토는 사용자가 원할 때만, 리뷰어 1명으로 제안한다
+If this continues an in-progress plan, extend it without contradicting decisions already locked in.
 
-정식 기획서를 다 정리한 뒤에는, 서브에이전트를 자동으로 부르지 않는다. 서브에이전트는 하나를 띄우는 것만으로도 도구 스키마 로딩 등 고정비용이 붙는다 — 짧은 검토 작업 하나에 그 고정비용을 여러 번(리뷰어를 여러 명 병렬로) 치르는 건 낭비다. 그래서 리뷰어는 세 관점(UX·기능명세·BM)을 한 사람이 다 보는 `web-plan-reviewer` **한 명**으로 통합해뒀다.
+## 4. A more thorough review is opt-in only, and goes through one reviewer
 
-짧게 한 줄로 제안만 한다: "더 꼼꼼하게 보고 싶으면 교차검토를 한 번 받을 수도 있어요 — 시간이 좀 더 걸립니다." 사용자가 원한다고 답했을 때만 Agent 도구로 `web-plan-reviewer`를 **한 번** 호출한다. 이때 초안 전체를 파일 경로가 아니라 **프롬프트에 텍스트로 직접 붙여** 넘긴다 — 리뷰어가 다른 파일을 찾아 읽으러 다니지 않게 하려는 것이다. 리뷰어는 초안을 고치지 않고 지적만 돌려주며, 돌아온 지적 중 실제로 반영할 것만 골라 반영한다.
+Once the formal plan is finished, don't automatically call a subagent. Spinning up even one subagent carries a fixed cost (tool-schema loading, etc.) — paying that fixed cost multiple times (several reviewers in parallel) for one short review task is wasteful. That's why the three lenses (UX, feature spec, BM) are consolidated into **one** `web-plan-reviewer`.
+
+Offer it in one short line: "If you want a more thorough look, I can run a cross-check review — it'll take a bit longer." Only call `web-plan-reviewer` (via the Agent tool, **once**) if the user says yes. Pass the full draft as **inline text in the prompt**, not a file path — this keeps the reviewer from wandering off to find and read other files. The reviewer doesn't edit the draft, only returns findings; pull in only the ones actually worth applying.
